@@ -3,31 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="login.css">
     <title>Login</title>
 </head>
 <body>
-    <h3>Ingregar Usuario</h3>
-    
-     <form action="" method="post">
-        <div>
-            <label for="txtEmail">
-                <b>Email:</b>
-            </label>
-            <br>
-            <input type="email"  id = " txtEmail" name="txtEmail" placeholder=" Ingrese su Email" required >
-            <br><br>
-            <label for="txtPass"></label>
-                <b>Contraseña:</b>
-            </label>
-            <br>
-            <input type="password"  id = " txtPass" name="txtPass" placeholder=" Ingrese su Contraseña"  required >
-        </div>
+    <Header>
+        <h2>Amelia Store</h2>
+    </Header>
 
-        <div>
-            <br><br>
-            <input type="submit" value="Ingresar" >
-        </div>
-    </form>
+    <div class="formulario">
+        <h1 id="Cuenta">Iniciar sesión</h1>
+        <form action="" method="post">
+            
+            <div class="username" >
+                <input type="email" required >
+                <label >Correo electrónico</label>
+                
+            </div>
+
+            <div class ="username" >
+                <input type="password"  required >
+                <label >Contraseña</label>
+            </div>
+            
+                <input type="submit" value="Iniciar">
+            
+            <div class ="CrearUsuario">
+             Quiero hacer el <a href="./registro.html"> registro.</a>
+            </div>
+        </form>
+       
+    </div>
+
     
 </body>
 </html>

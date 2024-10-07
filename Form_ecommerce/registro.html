@@ -4,55 +4,52 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrarse</title>
+    <link rel="stylesheet" href="login.css">
 </head>
 <body>
-    <h3>Crear un usuario</h3>
-    
-     <form action="" method="post">
-        <div>
-            <label for="txtNombre">
-              <b>Nombre:</b>
-            </label>
-            <br>
-            <input type="text" id = " txtNombre" name = "txtNombre" class =""  placeholder=" Ingrese su nombre" required >
-            <br><br>
-            <label for="txtApellido"></label>
-                <b>Apellido:</b>
-            </label>
-            <br>
-            <input type="text" id = " txtApellido" name = "txtApellido" class =""  placeholder=" Ingrese su apellido" required >
+    <Header>
+        <h1>Amelia Store</h1>
+    </Header>
 
-        </div>
+    <div class="formulario" id="crear">
+        <h1>Crear una cuenta</h1>
+        <form action="" method="post">
+            <div class="username" >
+                <input type="nombre" required >
+                <label >Nombre</label>
+            </div>
 
-        <div>
-            <br><br>
-            <label for="txtEmail">
-                <b>Email:</b>
-            </label>
-            <br>
-            <input type="email"  id = " txtEmail" name="txtEmail" placeholder=" ejemplo@gmail.com" required >
-            <br><br>
-            <label for="txtPass"></label>
-                <b>Contraseña:</b>
-            </label>
-            <br>
-            <input type="password"  id = " txtPass" name="txtPass" placeholder=" Crea una Contraseña"  required >
-        </div>
+            <div class="username" >
+                <input type="apellido" required >
+                <label >Apellido</label>
+            </div>
 
-        <div>
-            <br><br>
-            <label for="date"></label>
-                 <b>Fecha de nacimiento:</b>
-            </label>
-            <br>
-            <input type="date" name="date" id="date" required>
-        </div>
 
-        <div>
-            <br><br>
-            <input type="submit" value="Registrarse" >
-        </div>
-    </form>
-    
+            <div class="username" >
+                <input type="email" required >
+                <label >Correo electrónico</label>
+                
+            </div>
+
+            <div class ="username" >
+                <input type="password"  required >
+                <label >Crear contraseña</label>
+            </div>
+            
+            <div class ="username" >
+                <label >Fecha de nacimiento:</label>
+                <input type="date" id="cita"  >
+            </div>
+            
+            <div >
+                <input type="submit" value="Registrarse">
+
+            </div>
+           
+
+        </form>
+       
+    </div>
+
 </body>
 </html>
