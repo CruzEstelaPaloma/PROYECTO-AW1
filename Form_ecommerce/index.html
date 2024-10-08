@@ -9,48 +9,36 @@
 <body>
 
     <Header class="header"> 
-        <nav>
-            <input type="checkbox"  id="check">
-            <label for="check" class =" checkbtn">
-                <img src="./assets/menu.png" alt="Icono de Menu" style = "width: 13px; height: 20px;">
-            </label>
-            <a href="#" class="enlace">
-                <img src="./assets/Logo Belleza Minimalista Rosa (1).jpg" class="LogoSolito" style="height: 80px; width: 50px;">
-            </a>
-            <a href="#" class="titulo">Amelia</a>
-            
-            
-            <ul>
-                <li><a clas ="active" href="./index.html">Home</a></li>
-                <li><a href="./ropa.html">Ropa</a></li>
-                <li><a href="./maquillaje.html">Maquillaje</a></li>
-                <li><a href="./accesorios.html">Accesorios</a></li>
-                <li><a href="./login.html">Log out</a></li>
-            </ul>
-          
-        </nav>
 
-        <section>
-            <div class="Home"> 
-                <p class = "Titulo" ">
-                    <h1>Tienda de Belleza</h1>
-                </p>
-            </div>
-
-        </section>
+      
 
     </Header>
 
-    <div class="container">
-        <div class="item" id="pricipal"> 
-            caja 1
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel ipsum eleifend, sagittis nibh sollicitudin, gravida nisi. Quisque et lectus id urna dignissim tempor. Maecenas laoreet ex ut tristique feugiat. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sed scelerisque lacus. Sed in auctor elit. </p>
+    
+    <section>
+        <div class="Home"> 
+            <p class = "Titulo" ">
+                <h1>Tienda de Belleza</h1>
+            </p>
         </div>
-        <div class="item"> Caja 2</div>
-        <div class="item"> Caja 3</div>
+
+    </section>
+
+    <div class="container" id="cardContainer">
+       
+            <div  class="card">
+
+            </div>
+            
+
+
 
     </div>
+
     
     
+    <script  src="index.js" defer></script>
+    <script type="module" src="home.js" defer></script>
+    <script type="module" src="card.js" defer></script>
 </body>
 </html>
