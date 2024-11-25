@@ -1,0 +1,214 @@
+/* Reset de estilos */
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    list-style: none;
+    box-sizing: border-box;
+}
+
+body {
+    background-image: linear-gradient(#d18fd1, rgb(255, 255, 255));
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Contenedor principal del carrito */
+#cartContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 20px;
+    margin-top: 30px;
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+#cartContainer p {
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #5e278e;
+}
+
+/* Estilos para la lista de productos en el carrito */
+.cart-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 15px;
+    background-color: #f7f7f7;
+    border-radius: 5px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item p {
+    font-size: 16px;
+    color: #333;
+    margin: 0;
+    display: inline-block;
+}
+
+.cart-item .remove-item {
+    background-color: #d9534f;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.cart-item .remove-item:hover {
+    background-color: #c9302c;
+}
+
+/* Estilo para el botón de comprar */
+#buyButton {
+    background-color: #5e278e;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 30px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto 0;
+}
+
+#buyButton:hover {
+    background-color: #4b1f72;
+}
+
+/* Estilos de la cantidad en el carrito */
+.cart-item input {
+    width: 50px;
+    padding: 5px;
+    font-size: 14px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+/* Estilos para el total del carrito */
+#cartTotal {
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #333;
+    text-align: right;
+    padding-right: 20px;
+}
+
+/* Alineación de los textos dentro de los elementos del carrito */
+.cart-item .item-title,
+.cart-item .item-price,
+.cart-item .item-quantity {
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+}
+
+.cart-item .item-title {
+    width: 40%; /* Fija un ancho específico */
+    max-width: px; /* Ancho máximo para controlar el espacio */
+    text-align: left;
+    font-size: 16px;
+    color: #333;
+    white-space: nowrap; /* Evita que el texto pase a la siguiente línea */
+    overflow: hidden; /* Oculta el contenido que se desborda */
+    text-overflow: ellipsis; /* Aplica los puntos suspensivos */
+}
+
+/* Aseguramos que el título se alinee correctamente y no se expanda */
+.cart-item .item-price,
+.cart-item .item-quantity {
+    width: 20%;
+    text-align: center;
+}
+
+
+/* Centrar el botón de comprar y añadir margen inferior */
+#buyButton {
+    background-color: #5e278e;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    margin-top: 30px;
+    margin-bottom: 50px; /* Añade margen inferior */
+    transition: background-color 0.3s ease;
+    width: 100%;
+    max-width: 300px;
+    display: block; /* Hace que ocupe toda la línea */
+    margin-left: auto;
+    margin-right: auto; /* Centra el botón horizontalmente */
+}
+
+#buyButton:hover {
+    background-color: #4b1f72;
+}
+
+
+
+
+
+
+/* Estilo para el título "Tu carrito" */
+section h1 {
+    font-size: 50px; /* Aumenta el tamaño de la fuente */
+    
+    font-weight: bold;
+    margin: 20px 0; /* Margen superior e inferior */
+    text-align: center; /* Centra el texto */
+    color: hsl(0, 0%, 0%);
+    font-family:'Times New Roman', Times, serif;
+    justify-content: center;
+    align-items: center;
+}
+
+.cart-headers {
+    display: flex;
+    justify-content: space-between; /* Espaciado horizontal entre columnas */
+    align-items: center; /* Centra el contenido verticalmente */
+    padding: 5px 10px; /* Espacio interior reducido */
+    background-color: #e4a8e4; /* Color de fondo para distinguir los encabezados */
+    font-weight: bold;
+    border-radius: 5px;
+    margin-bottom: 0px; /* Espacio reducido entre encabezados y contenido */
+    height: 40px; /* Opcional: establece una altura uniforme */
+    margin-top: 0px;
+
+    padding-top: 20px;
+}
+
+.header-title, .header-quantity, .header-price {
+    width: 33%; /* Cada columna ocupa el 33% del espacio */
+    text-align: left; /* Alineación horizontal */
+    font-size: 14px; /* Tamaño de fuente ajustable */
+}
+
+
+p.header-price{
+    padding-right: 100px;
+}
+
+p.header-quantity{
+    padding-left: 40px;
+}
+p.header-title{
+    padding-left: 50px;
+}

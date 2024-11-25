@@ -1,43 +1,74 @@
+import { loadNavBar } from './components/navbar.js';
+import { cardComponet } from './components/card.js'; 
+
+loadNavBar(); 
 
 
-const navElements =[
-    { titile: 'Home', link: './index.html'},
-    { titile: 'Ropa', link: './ropa.html'},
-    { titile: 'Maquillaje', link: './maquillaje.html'},
-    { titile: 'Accesorios', link: './accesorios.html'},
-    { titile: 'Logout', link:'./login.html'},
-]
- const navBarComponent = `
-    <nav>
-        <input type="checkbox"  id="check">
-            <label for="check" class =" checkbtn">
-                <img src="./assets/menu.png" alt="Icono de Menu" style = "width: 13px; height: 20px;">
-            </label>
-            <a href="#" class="enlace">
-                <img src="./assets/Logo Belleza Minimalista Rosa (1).jpg" class="LogoSolito" style="height: 80px; width: 50px;">
-            </a>
-            <a href="#" class="titulo">Amelia</a>
-            
-            
-            <ul>
-               
-               ${
-                navElements.map (e=> {
-                    return ` <li class = "nav-item">
-                    <a class ="nav-link" href=  ${e.link}>${e.titile} </a></li>`
-                }).join('')
-               }
-               
-            </ul>
+const JSON_URL = "./data.json";
+
+
+async function cargarProductos() {
+  const contenedorProductos = document.querySelector(".container");
+
+  if (!contenedorProductos) {
+    console.error("El contenedor de productos '.container' no se encontró en el DOM.");
+    return;
+  }
+
+  try {
+    const respuesta = await fetch(JSON_URL);
+
+    if (!respuesta.ok) {
+      throw new Error("No se pudo cargar el archivo JSON.");
+    }
+
+    const data = await respuesta.json();
+
     
-          
-    </nav>
-`
+    const categorias = Object.keys(data.productos);
+
+  
+    contenedorProductos.innerHTML = '';
+
+   
+    categorias.forEach(categoria => {
+      const productos = data.productos[categoria]; 
+      const productosAMostrar = productos.slice(0, 3); 
+      productosAMostrar.forEach(producto => renderizarCard(producto));
+    });
+
+  } catch (error) {
+    console.error("Error al cargar los productos:", error.message);
+    contenedorProductos.innerHTML = `<p>${error.message}</p>`;
+  }
+}
 
 
-let navContainer = document.querySelector('header')
-window.addEventListener('load',() =>{
+function renderizarCard(producto) {
+  const cardContainer = document.getElementById('cardContainer');
+  if (!cardContainer) {
+    console.error("El contenedor de tarjetas no se encontró en el DOM.");
+    return;
+  }
 
-    navContainer.innerHTML = navBarComponent
-})
+  if (!producto) {
+    console.error("Producto no encontrado:", producto);
+    return;
+  }
+
+  const cardHTML = cardComponet(
+    producto.nombre, // Título
+    producto.descripcion, // Descripción
+    `$${producto.precio.toFixed(2)}`, // Precio
+    producto.imagen // Imagen
+  );
+
+ 
+  cardContainer.innerHTML += cardHTML;
+}
+
+
+document.addEventListener("DOMContentLoaded", cargarProductos);
+
+
 

@@ -6,7 +6,6 @@
     box-sizing: border-box;
    
 }
-
 nav{
     background: #d4acb2;
     height: 80px;
@@ -21,7 +20,6 @@ nav{
     height: 40px;
     
 }
-
 
 .texto{
     padding: 0px;
@@ -125,75 +123,3 @@ section{
         left: 0;
     }
 }
-
-.container{
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px,1fr));
-    gap: 15px;
-    padding: 15px 9%;
-    padding-bottom: 100px;
-    padding-right: 14%;
-    justify-content: center;
-    
-
-}
-.container .card{
-    box-shadow: 0 5px 10px rgb(150, 145, 145);
-    border-radius: 5px;
-    background: rgb(194, 124, 194);
-    border: silver;
-    text-align: center;
-    justify-content: right;
-    font-size: 16px;
-    box-sizing: border-box;
-    padding: 30px 20px;
-}
-
-.card{
-    justify-content: center;
-    align-items: center;
-    box-sizing: border-box;
-}
-
-#cantidad{
-    margin-bottom: 20px;
-}
-
-body{
-    background-image: linear-gradient(#d18fd1,white);
-}
-
-.card{
-
-    width: 100%;
-    background: purple;
-    border: black;
-    padding: 1rem;
-    font-family: arial;
-    color: white;
-    text-align: center;
-    
-}
-.card input{
-    align-items: center;
-    padding: 5px;
-}
-
-#Add{
-    padding: 15px;
-}
-
-
-html{
-    height: 100%;
-}
-#principal{
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1 1fr 1fr;
-    gap: 15px;
-    padding: 15px 9%;
-    padding-bottom: 100px;
-    padding-right: 14%;
-    justify-content: center;
-}
-

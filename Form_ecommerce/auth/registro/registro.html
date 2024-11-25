@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrarse</title>
-    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="/Form_ecommerce/styles/login.css">
+   
 </head>
 <body>
     <Header>
@@ -13,7 +14,7 @@
 
     <div class="formulario" id="crear">
         <h1>Crear una cuenta</h1>
-        <form action="" method="post">
+        <form action="" method="post" id="crearUser" >
             <div class="username" >
                 <input type="nombre" required >
                 <label >Nombre</label>
@@ -50,12 +51,9 @@
         </form>
        
     </div>
-    <script>
-        document.getElementById('crear').onsubmit = function(event) {
-            event.preventDefault(); 
-            window.location.href = 'login.html'; 
-        };
-    </script>
+    
+
+<script src= "./registro.js" defer></script>
 
 </body>
 </html>

@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" integrity="sha512-5Hs3dF2AEPkpNAR7UiOHba+lRSJNeM2ECkwxUIxC1Q/FLycGTbNapWXB4tP889k5T5Ju8fs4b1P5z/iB4nMfSQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="/Form_ecommerce/styles/navbar.css">
+   
+    
+    
     <title>Amelia Store</title>
 </head>
-<body>
+<body id="principal">
 
-    <Header class="header"> 
+    <header class="header"> 
+        
+        
 
-      
-
-    </Header>
+    </header>
 
     
     <section>
@@ -26,19 +31,38 @@
 
     <div class="container" id="cardContainer">
        
-            <div  class="card">
+        <div  class="card">
 
+        </div>
+
+        <div class="carrito">
+            <div class="header--carrito">
+                <h2>Tu Carrito</h2>
             </div>
-            
-
 
 
     </div>
 
+
+    <script>
+        const activeUser = JSON.parse(sessionStorage.getItem('active_user'));
+
+        if (activeUser) {
+            console.log(`Usuario activo: ${activeUser.nombre}`);
+           
+        } else {
+            console.log('No hay ningún usuario activo.');
+            
+            window.location.href = '/Form_ecommerce/auth/login/login.html';
+        }
+    </script>
+
     
     
-    <script  src="index.js" defer></script>
-    <script type="module" src="home.js" defer></script>
-    <script type="module" src="card.js" defer></script>
+    <script type="module"  src="./index.js" ></script>
+
+  
+
+
 </body>
 </html>
