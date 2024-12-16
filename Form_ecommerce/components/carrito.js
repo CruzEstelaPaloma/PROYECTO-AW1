@@ -87,4 +87,8 @@ document.addEventListener('DOMContentLoaded', () => {
             location.reload(); // Vaciar el carrito
         });
     }
+
+   
 });
+
+

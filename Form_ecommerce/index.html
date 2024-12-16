@@ -11,6 +11,8 @@
     
     <title>Amelia Store</title>
 </head>
+
+
 <body id="principal">
 
     <header class="header"> 
@@ -21,10 +23,14 @@
 
     
     <section>
-        <div class="Home"> 
-            <p class = "Titulo" ">
-                <h1>Tienda de Belleza</h1>
+        <div class="Home" id="Home"> 
+            <p class = "Titulo "  id="Titulo">
+                <h1 class="page-title">Tienda de Belleza </h1>
             </p>
+
+
+
+            <div id="search-container-place"></div>
         </div>
 
     </section>
@@ -59,10 +65,42 @@
 
     
     
-    <script type="module"  src="./index.js" ></script>
+    <script type="module"  src="./index.js" defer></script>
+    <script type="module"  src="./components/dataLoader.js" defer></script>
+   
+   
+    <footer>
+        <div class="footer-container">
+            <!-- Columna 1: Información de contacto -->
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <p>Teléfono: 299-4228145</p>
+                <p>Ubicación: Bariloche, Algarrobo</p>
+            </div>
+    
+            <!-- Columna 2: Envíos -->
+            <div class="footer-column">
+                <h3>Envíos</h3>
+                <p>A todo el país por Paq.Ar</p>
+            </div>
+    
+            <!-- Columna 3: Métodos de Pago -->
+            <div class="footer-column">
+                <h3>Medios de Pago</h3>
+                <ul>
+                    <li>Efectivo</li>
+                    <li>Transferencia</li>
+                    <li>Tarjetas</li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 
   
 
 
 </body>
+
+
+
 </html>

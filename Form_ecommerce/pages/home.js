@@ -1,51 +1,59 @@
 import { cardComponet } from '../components/card.js';
-import { loadNavBar } from '/Form_ecommerce/components/navbar.js';
+import { insertarSearchContainer, buscarProducto, actualizarTitulo } from '../components/search.js';
+import { cargarProductos } from '../components/dataLoader.js'; // Importación desde el nuevo archivo
+import { loadNavBar } from '../components/navbar.js';
+
+const JSON_URL = "../data.json"; // Ruta al archivo JSON
+
 loadNavBar();
 
+// Mapear títulos de categorías para un manejo más limpio
+const TITULOS_CATEGORIAS = {
+  maquillaje: "Productos de Maquillaje",
+  ropa: "Prenda de Ropa",
+  accesorios: "Accesorios",
 
-const JSON_URL = "../data.json";
+};
 
+document.addEventListener("DOMContentLoaded", () => {
+  insertarSearchContainer();
 
-async function cargarProductosPorCategoria() {
-  const contenedorProductos = document.querySelector(".container");
-  const categoria = document.body.id;
-  console.log("Categoria del body:", categoria);
-
-  if (!contenedorProductos) {
-    console.error("El contenedor de productos '.container' no se encontró en el DOM.");
-    return;
+  // Cargar productos según la página actual
+  if (document.body.id === "principal") {
+    cargarProductos();
+  } else {
+    cargarProductosPorCategoria();
   }
 
-  try {
-    if (!categoria) {
-      throw new Error("El atributo 'id' del body no está definido.");
-    }
+  // Configurar búsqueda en tiempo real
+  const searchInput = document.getElementById("search-input");
+  if (searchInput) {
+    searchInput.addEventListener("input", () => {
+      const searchValue = searchInput.value.trim();
 
-    const respuesta = await fetch(JSON_URL);
+      if (searchValue) {
+        buscarProducto(searchValue); // Realiza la búsqueda
+      } else {
+        // Restaurar el título original
+        const tituloOriginal =
+          document.body.id === "principal"
+            ? "Tienda de belleza"
+            : TITULOS_CATEGORIAS[document.body.id] || "Productos";
+        actualizarTitulo(tituloOriginal);
 
-    if (!respuesta.ok) {
-      throw new Error("No se pudo cargar el archivo JSON.");
-    }
-
-    const data = await respuesta.json();
-
-    
-    const productos = data.productos[categoria];
-
-    if (!productos || !Array.isArray(productos)) {
-      throw new Error(`No se encontraron productos para la categoría: ${categoria}`);
-    }
-
-    
-    renderizarCards(productos);
-  } catch (error) {
-    console.error("Error al cargar los productos:", error.message);
-    contenedorProductos.innerHTML = `<p>${error.message}</p>`;
+        // Restaurar la carga de productos
+        if (document.body.id === "principal") {
+          cargarProductos();
+        } else {
+          cargarProductosPorCategoria();
+        }
+      }
+    });
   }
-}
+});
 
-
-function renderizarCards(productos) {
+// Renderiza tarjetas de productos
+export function renderizarCards(productos) {
   const cardContainer = document.getElementById('cardContainer');
   if (!cardContainer) {
     console.error("El contenedor de tarjetas no se encontró en el DOM.");
@@ -57,56 +65,46 @@ function renderizarCards(productos) {
     return;
   }
 
-  cardContainer.innerHTML = ""; 
+  cardContainer.innerHTML = ""; // Limpia el contenedor antes de renderizar
 
-  
   productos.forEach(producto => {
     const cardHTML = cardComponet(
-      producto.nombre, // Título
-      producto.descripcion, // Descripción
+      producto.nombre,        // Título
+      producto.descripcion,   // Descripción
       `$${producto.precio.toFixed(2)}`, // Precio
-      producto.imagen, // Imagen principal
-      producto.id 
+      producto.imagen,        // Imagen
+      producto.id             // ID del producto
     );
     cardContainer.innerHTML += cardHTML;
-
-  
-    const addButton = cardContainer.querySelector(`#Add`);
-    addButton.addEventListener('click', () => {
-      const quantity = parseInt(card.querySelector('#cantidad').value);
-
-      if (quantity <= 0) {
-        alert("Selecciona una cantidad válida.");
-        return;
-      }
-
-    
-      let cart = JSON.parse(localStorage.getItem('cart')) || [];
-
-      const existingProduct = cart.find(item => item.id === producto.id);
-
-      if (existingProduct) {
-        
-        existingProduct.quantity += quantity;
-      } else {
-        
-        cart.push({
-          id: producto.id, 
-          title: producto.nombre,
-          price: producto.precio.toFixed(2),
-          quantity: quantity
-        });
-      }
-
-      
-      localStorage.setItem('cart', JSON.stringify(cart));
-      alert(`${producto.nombre} agregado al carrito.`);
-    });
   });
 }
 
-document.addEventListener("DOMContentLoaded", cargarProductosPorCategoria);
+// Carga productos según la categoría
+export async function cargarProductosPorCategoria() {
+  const categoria = document.body.id; // ID del body como categoría
+  const contenedorProductos = document.querySelector(".container");
 
+  if (!contenedorProductos) {
+    console.error("El contenedor de productos '.container' no se encontró en el DOM.");
+    return;
+  }
 
+  try {
+    if (!categoria) throw new Error("El atributo 'id' del body no está definido.");
 
+    const respuesta = await fetch(JSON_URL);
+    if (!respuesta.ok) throw new Error("No se pudo cargar el archivo JSON.");
 
+    const data = await respuesta.json();
+    const productos = data.productos[categoria];
+
+    if (!productos || !Array.isArray(productos)) {
+      throw new Error(`No se encontraron productos para la categoría: ${categoria}`);
+    }
+
+    renderizarCards(productos); // Muestra todos los productos de la categoría
+  } catch (error) {
+    console.error("Error al cargar los productos:", error.message);
+    contenedorProductos.innerHTML = `<p>${error.message}</p>`;
+  }
+}

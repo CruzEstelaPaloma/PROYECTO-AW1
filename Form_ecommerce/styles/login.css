@@ -1,46 +1,54 @@
-body{
+/* Estilos globales */
+body {
     margin: 0;
     padding: 0;
-    font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     background: #d4acb2;
 }
-.formulario{
+
+/* Estilos del contenedor del formulario */
+.formulario {
     position: absolute;
     top: 53%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
     width: 400px;
     background-color: #ebe3e4;
     border-radius: 10px;
 }
 
-.formulario h1{
+.formulario h1 {
     text-align: center;
     padding: 0 0 20px 0;
     color: rgb(45, 43, 48);
     border-bottom: 1px solid silver;
 }
-.formulario form{
 
+/* Estilos del formulario */
+.formulario form {
     padding: 0 40px;
     box-sizing: border-box;
 }
-form .username{
+
+/* Estilos del contenedor de los inputs */
+form .username {
     position: relative;
     border-bottom: 2px solid silver;
     margin: 20px 0;
 }
-.username input{
-width: 100%;
-padding: 0 5px;
-height: 40px;
-font-size: 16px;
-border: none;
-background: none;
-outline: none;
+
+/* Estilos de los inputs */
+.username input {
+    width: 100%;
+    padding: 0 5px;
+    height: 40px;
+    font-size: 16px;
+    border: none;
+    background: none;
+    outline: none;
 }
 
-
+/* Estilos de las etiquetas (labels) por defecto */
 .username label {
     position: absolute;
     top: 50%;
@@ -49,35 +57,24 @@ outline: none;
     transform: translateY(-50%);
     font-size: 16px;
     pointer-events: none;
-    transition: .5s;
+    transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
 }
 
-
-.username span::before{
-    content: '';
-    position: absolute;
-    top: 40px;
-    left: 0;
-    width: 0%;
-    height: 2px;
-    background: rgb(175, 60, 79);
-    transition: .9s;
-}
-
-
-.username input :focus ~label,
-.username input:focus~label{top: -5px;
+/* Cuando el input tiene contenido o está enfocado, el label se mueve hacia arriba */
+.username input:not(:placeholder-shown) + label,
+.username input:focus + label {
+    top: -10px;
     color: black;
-    font-size: 18px;
-    
+    font-size: 14px;
 }
 
-.username input:focus ~ span ::before,
-.username input:focus ~ span ::before{
-    width: 100%;
+/* Estilos adicionales de los inputs al enfocarse */
+.username input:focus {
+    border-bottom: 2px solid rgb(175, 60, 79);
 }
 
-input{
+/* Estilo del botón de envío */
+input[type="submit"] {
     height: 50px;
     width: 100%;
     border: 1px solid rgb(78, 76, 76);
@@ -87,62 +84,49 @@ input{
     align-items: center;
     outline: none;
     cursor: pointer;
-
+    color: white;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
-input:hover{
-    border-color: rgb(175, 60, 79);
-    transition:.5s ;
+input[type="submit"]:hover {
+    background: rgb(145, 50, 70);
+    border-color: rgb(145, 50, 70);
 }
 
-.CrearUsuario{
+/* Estilos del contenedor de texto para crear cuenta */
+.CrearUsuario {
     margin: 30px 0;
-    text-align:center;
+    text-align: center;
     font-size: 16px;
     color: black;
-
-}
-.CrearUsuario a{
-    color:blue;
-    text-decoration:none;
 }
 
-header{
+.CrearUsuario a {
+    color: blue;
+    text-decoration: none;
+}
+
+/* Estilos para el header */
+header {
     text-align: center;
-    font-family:'Times New Roman', Times, serif;
+    font-family: 'Times New Roman', Times, serif;
     justify-content: center;
     font-size: 20px;
     color: rgb(45, 43, 48);
     align-items: center;
-
 }
 
-
-#cita{
+/* Estilo específico para el campo de fecha */
+#cita {
     width: 100%;
     align-items: center;
     text-align: right;
     cursor: pointer;
     user-select: none;
     -webkit-user-select: none;
-
 }
 
-#crear{
+/* Ajusta el tamaño del formulario */
+#crear {
     height: 500px;
 }
-
-
-
-
-
-
-
-
-
-
-  
-
-
-
-
