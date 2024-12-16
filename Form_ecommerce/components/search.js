@@ -1,7 +1,7 @@
 import { renderizarCards } from '../pages/home.js';
-const JSON_URL = "/Form_ecommerce/data.json"; // Asegúrate de que la ruta sea correcta
+const JSON_URL = "/Form_ecommerce/data.json"; 
 
-// Inserta el buscador en el DOM
+
 export function insertarSearchContainer() {
   const searchHTML = `
     <div id="search-container">
@@ -16,15 +16,15 @@ export function insertarSearchContainer() {
   }
 }
 
-// Función para actualizar el título de la página
+
 export function actualizarTitulo(mensaje) {
-  const titulo = document.querySelector(".page-title"); // Asegúrate de tener un elemento con esta clase en el HTML
+  const titulo = document.querySelector(".page-title"); 
   if (titulo) {
     titulo.textContent = mensaje;
   }
 }
 
-// Función para buscar productos o categorías
+
 export async function buscarProducto(nombreProducto) {
   try {
     const respuesta = await fetch(JSON_URL);
@@ -40,18 +40,18 @@ export async function buscarProducto(nombreProducto) {
       return;
     }
 
-    contenedorProductos.innerHTML = ""; // Limpiar el contenedor de productos
+    contenedorProductos.innerHTML = ""; 
 
-    // Comprobar si el término de búsqueda es una categoría
+    
     const categoriaMatch = categorias.find((categoria) =>
       categoria.toLowerCase().includes(nombreProducto.toLowerCase())
     );
 
     if (categoriaMatch) {
-      // Mostrar todos los productos de la categoría
+      
       productosEncontrados = data.productos[categoriaMatch];
     } else {
-      // Buscar productos por nombre en todas las categorías
+      
       categorias.forEach((categoria) => {
         const productosCategoria = data.productos[categoria].filter((producto) =>
           producto.nombre.toLowerCase().includes(nombreProducto.toLowerCase())
@@ -60,9 +60,9 @@ export async function buscarProducto(nombreProducto) {
       });
     }
 
-    // Actualizar el título o mostrar mensaje
+   
     if (productosEncontrados.length > 0) {
-      actualizarTitulo("Resultados de la búsqueda"); // Cambia el título al resultado de la búsqueda
+      actualizarTitulo("Resultados de la búsqueda"); 
       renderizarCards(productosEncontrados);
     } else {
       contenedorProductos.innerHTML = "<p>No se encontraron productos.</p>";

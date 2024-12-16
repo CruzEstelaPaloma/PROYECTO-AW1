@@ -1,4 +1,4 @@
-// index.js
+
 import { cargarProductos } from './components/dataLoader.js';
 import { loadNavBar } from './components/navbar.js';
 

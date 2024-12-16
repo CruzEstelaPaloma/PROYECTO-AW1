@@ -1,4 +1,4 @@
-/* Reset de estilos */
+
 * {
     padding: 0;
     margin: 0;
@@ -13,7 +13,7 @@ body {
     background-size: cover;
 }
 
-/* Contenedor principal del carrito */
+
 #cartContainer {
     display: flex;
     flex-direction: column;
@@ -36,7 +36,7 @@ body {
     color: #5e278e;
 }
 
-/* Estilos para la lista de productos en el carrito */
+
 .cart-item {
     display: flex;
     flex-direction: row;
@@ -71,7 +71,7 @@ body {
     background-color: #c9302c;
 }
 
-/* Estilo para el botón de comprar */
+
 #buyButton {
     background-color: #5e278e;
     color: white;
@@ -91,7 +91,7 @@ body {
     background-color: #4b1f72;
 }
 
-/* Estilos de la cantidad en el carrito */
+
 .cart-item input {
     width: 50px;
     padding: 5px;
@@ -101,7 +101,7 @@ body {
     border: 1px solid #ccc;
 }
 
-/* Estilos para el total del carrito */
+
 #cartTotal {
     margin-top: 20px;
     font-size: 18px;
@@ -111,7 +111,7 @@ body {
     padding-right: 20px;
 }
 
-/* Alineación de los textos dentro de los elementos del carrito */
+
 .cart-item .item-title,
 .cart-item .item-price,
 .cart-item .item-quantity {
@@ -121,17 +121,17 @@ body {
 }
 
 .cart-item .item-title {
-    width: 40%; /* Fija un ancho específico */
-    max-width: px; /* Ancho máximo para controlar el espacio */
+    width: 40%; 
+    max-width: px; 
     text-align: left;
     font-size: 16px;
     color: #333;
-    white-space: nowrap; /* Evita que el texto pase a la siguiente línea */
-    overflow: hidden; /* Oculta el contenido que se desborda */
-    text-overflow: ellipsis; /* Aplica los puntos suspensivos */
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis;
 }
 
-/* Aseguramos que el título se alinee correctamente y no se expanda */
+
 .cart-item .item-price,
 .cart-item .item-quantity {
     width: 20%;
@@ -139,7 +139,6 @@ body {
 }
 
 
-/* Centrar el botón de comprar y añadir margen inferior */
 #buyButton {
     background-color: #5e278e;
     color: white;
@@ -149,13 +148,13 @@ body {
     cursor: pointer;
     font-size: 18px;
     margin-top: 30px;
-    margin-bottom: 50px; /* Añade margen inferior */
+    margin-bottom: 50px; 
     transition: background-color 0.3s ease;
     width: 100%;
     max-width: 300px;
-    display: block; /* Hace que ocupe toda la línea */
+    display: block;
     margin-left: auto;
-    margin-right: auto; /* Centra el botón horizontalmente */
+    margin-right: auto;
 }
 
 #buyButton:hover {
@@ -167,13 +166,13 @@ body {
 
 
 
-/* Estilo para el título "Tu carrito" */
+
 section h1 {
-    font-size: 50px; /* Aumenta el tamaño de la fuente */
+    font-size: 50px; 
     
     font-weight: bold;
-    margin: 20px 0; /* Margen superior e inferior */
-    text-align: center; /* Centra el texto */
+    margin: 20px 0; 
+    text-align: center; 
     color: hsl(0, 0%, 0%);
     font-family:'Times New Roman', Times, serif;
     justify-content: center;
@@ -182,23 +181,23 @@ section h1 {
 
 .cart-headers {
     display: flex;
-    justify-content: space-between; /* Espaciado horizontal entre columnas */
-    align-items: center; /* Centra el contenido verticalmente */
-    padding: 5px 10px; /* Espacio interior reducido */
-    background-color: #e4a8e4; /* Color de fondo para distinguir los encabezados */
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 5px 10px; 
+    background-color: #e4a8e4; 
     font-weight: bold;
     border-radius: 5px;
-    margin-bottom: 0px; /* Espacio reducido entre encabezados y contenido */
-    height: 40px; /* Opcional: establece una altura uniforme */
+    margin-bottom: 0px; 
+    height: 40px; 
     margin-top: 0px;
 
     padding-top: 20px;
 }
 
 .header-title, .header-quantity, .header-price {
-    width: 33%; /* Cada columna ocupa el 33% del espacio */
-    text-align: left; /* Alineación horizontal */
-    font-size: 14px; /* Tamaño de fuente ajustable */
+    width: 33%; 
+    text-align: left; 
+    font-size: 14px; 
 }
 
 

@@ -6,7 +6,7 @@ body {
     background: #d4acb2;
 }
 
-/* Estilos del contenedor del formulario */
+
 .formulario {
     position: absolute;
     top: 53%;
@@ -48,7 +48,6 @@ form .username {
     outline: none;
 }
 
-/* Estilos de las etiquetas (labels) por defecto */
 .username label {
     position: absolute;
     top: 50%;
@@ -60,7 +59,7 @@ form .username {
     transition: top 0.3s ease, font-size 0.3s ease, color 0.3s ease;
 }
 
-/* Cuando el input tiene contenido o está enfocado, el label se mueve hacia arriba */
+
 .username input:not(:placeholder-shown) + label,
 .username input:focus + label {
     top: -10px;
@@ -68,12 +67,12 @@ form .username {
     font-size: 14px;
 }
 
-/* Estilos adicionales de los inputs al enfocarse */
+
 .username input:focus {
     border-bottom: 2px solid rgb(175, 60, 79);
 }
 
-/* Estilo del botón de envío */
+
 input[type="submit"] {
     height: 50px;
     width: 100%;
@@ -93,7 +92,7 @@ input[type="submit"]:hover {
     border-color: rgb(145, 50, 70);
 }
 
-/* Estilos del contenedor de texto para crear cuenta */
+
 .CrearUsuario {
     margin: 30px 0;
     text-align: center;
@@ -106,7 +105,7 @@ input[type="submit"]:hover {
     text-decoration: none;
 }
 
-/* Estilos para el header */
+
 header {
     text-align: center;
     font-family: 'Times New Roman', Times, serif;
@@ -116,7 +115,7 @@ header {
     align-items: center;
 }
 
-/* Estilo específico para el campo de fecha */
+
 #cita {
     width: 100%;
     align-items: center;
@@ -126,7 +125,7 @@ header {
     -webkit-user-select: none;
 }
 
-/* Ajusta el tamaño del formulario */
+
 #crear {
     height: 500px;
 }

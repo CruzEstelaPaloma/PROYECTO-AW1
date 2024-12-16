@@ -1,9 +1,9 @@
-// dataLoader.js
+
 import { renderizarCards } from '../pages/home.js';
 
 const JSON_URL = "./data.json";
 
-// Función para cargar los primeros 3 productos de cada categoría
+
 export async function cargarProductos() {
   try {
     const respuesta = await fetch(JSON_URL);
@@ -13,13 +13,13 @@ export async function cargarProductos() {
     const categorias = Object.keys(data.productos);
     let productosLimitados = [];
 
-    // Seleccionamos los primeros 3 productos de cada categoría
+    
     categorias.forEach((categoria) => {
       const productosCategoria = data.productos[categoria];
-      productosLimitados = productosLimitados.concat(productosCategoria.slice(0, 3)); // Solo los 3 primeros
+      productosLimitados = productosLimitados.concat(productosCategoria.slice(0, 3)); 
     });
 
-    renderizarCards(productosLimitados); // Renderiza los 3 primeros productos de cada categoría
+    renderizarCards(productosLimitados); 
   } catch (error) {
     console.error("Error al cargar los productos:", error.message);
     const contenedorProductos = document.querySelector(".container");

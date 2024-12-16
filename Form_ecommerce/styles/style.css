@@ -8,17 +8,17 @@
 
 .container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));  /* Adaptación responsiva */
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); 
     gap: 15px;
     padding: 15px 11%;
     padding-bottom: 100px;
     padding-right: 14%;
     justify-content: center;
     justify-items: center;
-    grid-template-rows: auto;  /* Para que las filas se ajusten automáticamente */
+    grid-template-rows: auto;  
 }
 
-/* Añadimos reglas más claras para las cards */
+
 .container .card {
     box-shadow: 0 5px 10px rgb(150, 145, 145);
     border-radius: 5px;
@@ -34,23 +34,23 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 300px;  /* Asegura que las tarjetas tengan una altura mínima constante */
+    min-height: 300px;  
     transition: transform 0.2s ease-in-out;
 }
 
 .card:hover {
-    transform: scale(1.05); /* Añadir un efecto cuando el cursor pase sobre la tarjeta */
+    transform: scale(1.05);
 }
 
 .card img {
-    width: 100%; /* Hace que la imagen ocupe el 100% del contenedor de la card */
-    height: 150px; /* Fija la altura de la imagen */
-    object-fit: cover; /* Cubre el espacio de la card sin distorsionar */
-    object-position: center; /* Asegura que la imagen esté centrada dentro del área */
+    width: 100%; 
+    height: 150px; 
+    object-fit: cover; 
+    object-position: center; 
     border: 2px solid rgb(131, 63, 148);
     border-radius: 10px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin: 0 auto 1rem; /* Asegura que no haya márgenes extra en los lados y al centro de la card */
+    margin: 0 auto 1rem; 
 }
 
 .card input {
@@ -70,7 +70,7 @@ body {
 }
 
 #principal {
-    grid-template-columns: repeat(3, 1fr);  /* Forzar siempre 3 columnas */
+    grid-template-columns: repeat(3, 1fr);  
     gap: 15px;
     padding-bottom: 100px;
     align-items: center;
@@ -83,16 +83,16 @@ body {
 
 
 
-/* Media Queries para asegurar que el diseño sea adecuado en pantallas pequeñas */
+
 @media screen and (max-width: 900px) {
     .container {
-        grid-template-columns: repeat(2, 1fr);  /* 2 columnas en pantallas medianas */
+        grid-template-columns: repeat(2, 1fr); 
     }
 }
 
 @media screen and (max-width: 600px) {
     .container {
-        grid-template-columns: 1fr; /* Solo una columna en pantallas pequeñas */
+        grid-template-columns: 1fr; 
     }
 }
 
@@ -129,7 +129,7 @@ body {
     
 }
 .button:hover {
-    transform: scale(1.05); /* Añadir un efecto cuando el cursor pase sobre la tarjeta */
+    transform: scale(1.05); 
 }
 
 #Home{
