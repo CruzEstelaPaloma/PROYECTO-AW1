@@ -51,17 +51,16 @@
 
 
     <script>
-        const activeUser = JSON.parse(sessionStorage.getItem('active_user'));
-
+        const activeUser = JSON.parse(localStorage.getItem('usuario'));
+    
         if (activeUser) {
             console.log(`Usuario activo: ${activeUser.nombre}`);
-           
         } else {
             console.log('No hay ningún usuario activo.');
-            
             window.location.href = '/Form_ecommerce/auth/login/login.html';
         }
     </script>
+    
 
     
     

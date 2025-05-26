@@ -1,46 +1,33 @@
-
 document.addEventListener('DOMContentLoaded', function () {
-    
-    const login = document.getElementById('login');
-   
-  
-  
-    if (login) {
-        login.addEventListener('submit', function (event) {
+    const loginForm = document.getElementById('login-form');
+
+    if (loginForm) {
+        loginForm.addEventListener('submit', async function (event) {
             event.preventDefault();
-  
+
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
-  
-            console.log("Email:", email);
-            console.log("Password:", password);
-  
-            
-            const Users = JSON.parse(sessionStorage.getItem('users')) || [];
-  
-            
-            const validUser = Users.find(user => user.email === email && user.password === password);
-  
-            if (!validUser) {
-                return alert('Usuario y/o contraseña incorrectos!');
-            }
-  
-            
-            sessionStorage.setItem('active_user', JSON.stringify(validUser));
-  
-            alert(`Bienvenido ${validUser.nombre}`);
-  
-            
-            const authenticated = true; 
-  
-            if (authenticated) {
-               window.location.href = "/Form_ecommerce/index.html"; 
-            } else {
-                alert("Datos incorrectos.");
+
+            try {
+                const res = await fetch('http://localhost:3000/usuarios');
+                const users = await res.json();
+
+                const validUser = users.find(user => user.email === email && user.contraseña === password);
+
+                if (!validUser) {
+                    return alert('Usuario y/o contraseña incorrectos!');
+                }
+
+                localStorage.setItem('usuario', JSON.stringify(validUser));
+
+                alert(`Bienvenido ${validUser.nombre}`);
+
+                // Verificá la ruta real de tu index
+                window.location.href = "/Form_ecommerce/index.html";
+            } catch (error) {
+                console.error(error);
+                alert("Error al verificar usuario.");
             }
         });
     }
-  
-   
-  });
-  
+});

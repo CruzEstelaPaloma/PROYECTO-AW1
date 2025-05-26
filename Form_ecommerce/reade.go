@@ -7,17 +7,7 @@ export async function cargarProductos() {
     const respuesta = await fetch(API_URL);
     if (!respuesta.ok) throw new Error("No se pudo cargar el archivo del backend.");
 
-    const productosData = await respuesta.json();
-
-    const productos = [];
-    for (const categoria in productosData.productos) {
-      productosData.productos[categoria].forEach(prod => {
-        productos.push({
-          ...prod,
-          categoria // agregamos la categoría al objeto producto
-        });
-      });
-    }
+    const productos = await respuesta.json();
 
     // Agrupar por categoría
     const productosPorCategoria = {};
@@ -35,7 +25,7 @@ export async function cargarProductos() {
       productosLimitados = productosLimitados.concat(lista.slice(0, 3));
     });
 
-    renderizarCards(productosLimitados);
+    renderizarCards(productosLimitados); 
   } catch (error) {
     console.error("Error al cargar los productos:", error.message);
     const contenedorProductos = document.querySelector(".container");

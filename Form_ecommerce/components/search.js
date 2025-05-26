@@ -1,6 +1,6 @@
 import { renderizarCards } from '../pages/home.js';
-const JSON_URL = "/Form_ecommerce/data.json"; 
 
+const API_URL = "http://localhost:3000/productos";
 
 export function insertarSearchContainer() {
   const searchHTML = `
@@ -16,7 +16,6 @@ export function insertarSearchContainer() {
   }
 }
 
-
 export function actualizarTitulo(mensaje) {
   const titulo = document.querySelector(".page-title"); 
   if (titulo) {
@@ -24,15 +23,22 @@ export function actualizarTitulo(mensaje) {
   }
 }
 
-
 export async function buscarProducto(nombreProducto) {
   try {
-    const respuesta = await fetch(JSON_URL);
-    if (!respuesta.ok) throw new Error("No se pudo cargar el archivo JSON.");
+    const respuesta = await fetch(API_URL);
+    if (!respuesta.ok) throw new Error("No se pudo cargar los productos del backend.");
 
     const data = await respuesta.json();
-    const categorias = Object.keys(data.productos);
-    let productosEncontrados = [];
+
+    const productos = [];
+    for (const categoria in data.productos) {
+      data.productos[categoria].forEach(prod => {
+        productos.push({
+          ...prod,
+          categoria
+        });
+      });
+    }
 
     const contenedorProductos = document.querySelector(".container");
     if (!contenedorProductos) {
@@ -40,29 +46,13 @@ export async function buscarProducto(nombreProducto) {
       return;
     }
 
-    contenedorProductos.innerHTML = ""; 
-
-    
-    const categoriaMatch = categorias.find((categoria) =>
-      categoria.toLowerCase().includes(nombreProducto.toLowerCase())
+    const productosEncontrados = productos.filter(producto =>
+      producto.nombre.toLowerCase().includes(nombreProducto.toLowerCase()) ||
+      producto.categoria.toLowerCase().includes(nombreProducto.toLowerCase())
     );
 
-    if (categoriaMatch) {
-      
-      productosEncontrados = data.productos[categoriaMatch];
-    } else {
-      
-      categorias.forEach((categoria) => {
-        const productosCategoria = data.productos[categoria].filter((producto) =>
-          producto.nombre.toLowerCase().includes(nombreProducto.toLowerCase())
-        );
-        productosEncontrados = productosEncontrados.concat(productosCategoria);
-      });
-    }
-
-   
     if (productosEncontrados.length > 0) {
-      actualizarTitulo("Resultados de la búsqueda"); 
+      actualizarTitulo("Resultados de la búsqueda");
       renderizarCards(productosEncontrados);
     } else {
       contenedorProductos.innerHTML = "<p>No se encontraron productos.</p>";

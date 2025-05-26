@@ -70,7 +70,7 @@ export function renderizarCards(productos) {
   productos.forEach(producto => {
     const cardHTML = cardComponet(
       producto.nombre,        // Título
-      producto.descripcion,   // Descripción
+      producto.desc,   // Descripción
       `$${producto.precio.toFixed(2)}`, // Precio
       producto.imagen,        // Imagen
       producto.id             // ID del producto
@@ -92,17 +92,28 @@ export async function cargarProductosPorCategoria() {
   try {
     if (!categoria) throw new Error("El atributo 'id' del body no está definido.");
 
-    const respuesta = await fetch(JSON_URL);
+    const respuesta = await fetch('http://localhost:3000/productos');
     if (!respuesta.ok) throw new Error("No se pudo cargar el archivo JSON.");
 
     const data = await respuesta.json();
-    const productos = data.productos[categoria];
 
-    if (!productos || !Array.isArray(productos)) {
+    // Unificamos todos los productos en un solo array con su categoría
+    const productos = [];
+    for (const cat in data.productos) {
+      data.productos[cat].forEach(p => {
+        productos.push({ ...p, categoria: cat });
+      });
+    }
+
+    const productosFiltrados = productos.filter(p => 
+      p.categoria.toLowerCase() === categoria.toLowerCase()
+    );
+
+    if (!productosFiltrados.length) {
       throw new Error(`No se encontraron productos para la categoría: ${categoria}`);
     }
 
-    renderizarCards(productos); 
+    renderizarCards(productosFiltrados); 
   } catch (error) {
     console.error("Error al cargar los productos:", error.message);
     contenedorProductos.innerHTML = `<p>${error.message}</p>`;
