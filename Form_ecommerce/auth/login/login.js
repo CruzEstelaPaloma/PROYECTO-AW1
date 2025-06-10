@@ -22,15 +22,15 @@ document.addEventListener('DOMContentLoaded', function () {
           }
   
           const data = await res.json();
-          localStorage.setItem('token', data.token);  // Guardás el token
+          localStorage.setItem('token', data.token);  
           localStorage.setItem('usuario', JSON.stringify(data.usuario));
   
           alert('Login exitoso! Bienvenido');
   
-          // Llamás a función que consume rutas protegidas, por ejemplo, obtener usuarios
+          
           await obtenerUsuarios();
   
-          // Redirigir a la página principal (cambiá la ruta si es necesario)
+          
           window.location.href = '/Form_ecommerce/index.html';
   
         } catch (error) {
@@ -41,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
   
-  // Función para consumir ruta protegida usuarios
+  
   async function obtenerUsuarios() {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
   
       const usuarios = await res.json();
       console.log('Usuarios protegidos:', usuarios);
-      // Podés mostrarlos en la UI o trabajar con ellos aquí
+      
   
     } catch (error) {
       console.error('Error:', error);

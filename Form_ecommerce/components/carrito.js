@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
         console.error("No se encontró el botón con ID 'buyButton'.");
     }
 
-    // Mostrar mensaje si el carrito está vacío
+    
     if (cart.length === 0) {
         cartContainer.innerHTML = `
             <p>Tu carrito está vacío.</p>
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
             <p class="header-price">Subtotal</p>
         </div>
     `;
-    cartContainer.innerHTML = ''; // Limpia todo
+    cartContainer.innerHTML = ''; 
 
     const headerDiv = document.createElement('div');
     headerDiv.innerHTML = headersHTML;
@@ -72,11 +72,11 @@ document.addEventListener('DOMContentLoaded', () => {
             const index = event.target.getAttribute('data-index');
             cart.splice(index, 1);
             localStorage.setItem('cart', JSON.stringify(cart));
-            location.reload(); // Recargar para actualizar la vista
+            location.reload(); 
         }
     });
 
-    // Comprar y enviar al backend
+    
     if (comprarBtn) {
         comprarBtn.addEventListener('click', async () => {
             if (cart.length === 0) {
@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
 
-             // Aquí asumo que guardás el token JWT en localStorage bajo la clave 'token'
+             
              const token = localStorage.getItem('token');
              if (!token) {
                  alert("No se encontró el token de autenticación. Iniciá sesión nuevamente.");
@@ -98,7 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
              }
         
             const productos = cart.map(item => ({
-                id: String(item.id), // Forzar id como string
+                id: String(item.id), 
                 cantidad: parseInt(item.quantity)
             }));
         

@@ -3,7 +3,7 @@ import { insertarSearchContainer, buscarProducto, actualizarTitulo } from '../co
 import { cargarProductos } from '../components/dataLoader.js'; 
 import { loadNavBar } from '../components/navbar.js';
 
-const JSON_URL = "http://localhost:3000/api/Productos"; // Usamos la API del backend
+const JSON_URL = "http://localhost:3000/api/Productos"; 
 
 const TITULOS_CATEGORIAS = {
   maquillaje: "Productos de Maquillaje",
@@ -17,9 +17,9 @@ document.addEventListener("DOMContentLoaded", () => {
   insertarSearchContainer();
 
   if (document.body.id === "principal") {
-    cargarProductos(); // muestra todos los productos en el home
+    cargarProductos(); 
   } else {
-    cargarProductosPorCategoria(); // muestra según categoría (body.id)
+    cargarProductosPorCategoria(); 
   }
 
   const searchInput = document.getElementById("search-input");
@@ -87,7 +87,7 @@ export async function cargarProductosPorCategoria() {
     const respuesta = await fetch(JSON_URL);
     if (!respuesta.ok) throw new Error("No se pudo cargar el archivo de productos.");
 
-    const productos = await respuesta.json(); // array plano
+    const productos = await respuesta.json(); 
 
     const productosFiltrados = productos.filter(p =>
       p.categoria?.toLowerCase() === categoria.toLowerCase()

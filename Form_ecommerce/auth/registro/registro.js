@@ -10,7 +10,7 @@ registroForm.addEventListener('submit', async (e) => {
   const fechaNacimiento = document.getElementById('cita').value;
 
   try {
-    // Verificamos si el email ya está registrado
+    
     const respuesta = await fetch('http://localhost:3000/api/usuarios/existeEmail', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },

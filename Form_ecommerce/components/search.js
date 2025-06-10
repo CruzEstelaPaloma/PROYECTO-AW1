@@ -1,6 +1,6 @@
 import { renderizarCards } from '../pages/home.js';
 
-const API_URL = "http://localhost:3000/api/Productos"; // ✅ URL correcta
+const API_URL = "http://localhost:3000/api/Productos"; 
 
 export function insertarSearchContainer() {
   const searchHTML = `
@@ -28,7 +28,7 @@ export async function buscarProducto(nombreProducto) {
     const respuesta = await fetch(API_URL);
     if (!respuesta.ok) throw new Error("No se pudo cargar los productos del backend.");
 
-    const productos = await respuesta.json(); // ✅ ya es un array plano
+    const productos = await respuesta.json(); 
 
     const contenedorProductos = document.querySelector(".container");
     if (!contenedorProductos) {
