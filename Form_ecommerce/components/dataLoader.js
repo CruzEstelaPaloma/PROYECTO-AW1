@@ -1,25 +1,15 @@
 import { renderizarCards } from '../pages/home.js';
 
-const API_URL = "http://localhost:3000/productos"; // backend
+const API_URL = "http://localhost:3000/api/Productos"; // Ruta correcta del backend
 
 export async function cargarProductos() {
   try {
     const respuesta = await fetch(API_URL);
     if (!respuesta.ok) throw new Error("No se pudo cargar el archivo del backend.");
 
-    const productosData = await respuesta.json();
+    const productos = await respuesta.json(); // Recibe un array plano
 
-    const productos = [];
-    for (const categoria in productosData.productos) {
-      productosData.productos[categoria].forEach(prod => {
-        productos.push({
-          ...prod,
-          categoria // agregamos la categoría al objeto producto
-        });
-      });
-    }
-
-    // Agrupar por categoría
+    // Agrupar productos por categoría
     const productosPorCategoria = {};
     productos.forEach(prod => {
       const categoria = prod.categoria || 'otros';
@@ -35,6 +25,7 @@ export async function cargarProductos() {
       productosLimitados = productosLimitados.concat(lista.slice(0, 3));
     });
 
+    // Renderizar los productos en la interfaz
     renderizarCards(productosLimitados);
   } catch (error) {
     console.error("Error al cargar los productos:", error.message);

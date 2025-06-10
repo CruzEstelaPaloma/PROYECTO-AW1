@@ -40,24 +40,29 @@ document.addEventListener('DOMContentLoaded', () => {
             <p class="header-price">Subtotal</p>
         </div>
     `;
-    cartContainer.innerHTML = headersHTML;
+    cartContainer.innerHTML = ''; // Limpia todo
 
-    // Renderizar productos
+    const headerDiv = document.createElement('div');
+    headerDiv.innerHTML = headersHTML;
+    cartContainer.appendChild(headerDiv);
+    
     cart.forEach((item, index) => {
-        const totalItemPrice = item.quantity * parseFloat(item.price.replace('$', ''));
-        totalCarrito += totalItemPrice;
-
-        const productHTML = `
-            <div class="cart-item">
-                <p class="item-title">${item.title}</p>
-                <p class="item-quantity"> ${item.quantity}</p>
-                <p class="item-price"> $${totalItemPrice.toFixed(2)}</p>
-                <button class="remove-item" data-index="${index}">Eliminar</button>
-            </div>
+        const nombreProducto = item.title || 'Producto sin nombre';
+        const cantidad = parseInt(item.quantity);
+        const precioUnitario = parseFloat(item.price.replace('$', ''));
+        const subtotal = precioUnitario * cantidad;
+        totalCarrito += subtotal;
+    
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('cart-item');
+        itemDiv.innerHTML = `
+            <p class="item-title">${nombreProducto}</p>
+            <p class="item-quantity">${cantidad}</p>
+            <p class="item-price">$${subtotal.toFixed(2)}</p>
+            <button class="remove-item" data-index="${index}">Eliminar</button>
         `;
-        cartContainer.innerHTML += productHTML;
+        cartContainer.appendChild(itemDiv);
     });
-
     cartTotalElement.innerHTML = `<strong>Total del carrito: $${totalCarrito.toFixed(2)}</strong>`;
     cartContainer.appendChild(cartTotalElement);
 
@@ -84,10 +89,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert("No se encontró el usuario. Iniciá sesión antes de comprar.");
                 return;
             }
+
+             // Aquí asumo que guardás el token JWT en localStorage bajo la clave 'token'
+             const token = localStorage.getItem('token');
+             if (!token) {
+                 alert("No se encontró el token de autenticación. Iniciá sesión nuevamente.");
+                 return;
+             }
         
             const productos = cart.map(item => ({
-                id: item.id,
-                cantidad: item.quantity
+                id: String(item.id), // Forzar id como string
+                cantidad: parseInt(item.quantity)
             }));
         
             const total = cart.reduce((acc, item) => {
@@ -96,17 +108,18 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 0);
         
             const venta = {
-                id_usuario: usuario.id,
+                id_usuario: usuario.id,  // <- esto está bien
                 direccion: usuario.direccion || 'Sin dirección',
                 total,
                 productos
-            };
+              };
         
             try {
-                const res = await fetch('http://localhost:3000/ventas', {
+                const res = await fetch('http://localhost:3000/api/Ventas/comprar', {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(venta)
+                    headers: { 'Content-Type': 'application/json' ,
+                   'Authorization': `Bearer ${token}`},
+                   body: JSON.stringify(venta)
                 });
         
                 if (!res.ok) {

@@ -1,6 +1,6 @@
 import { renderizarCards } from '../pages/home.js';
 
-const API_URL = "http://localhost:3000/productos";
+const API_URL = "http://localhost:3000/api/Productos"; // ✅ URL correcta
 
 export function insertarSearchContainer() {
   const searchHTML = `
@@ -17,7 +17,7 @@ export function insertarSearchContainer() {
 }
 
 export function actualizarTitulo(mensaje) {
-  const titulo = document.querySelector(".page-title"); 
+  const titulo = document.querySelector(".page-title");
   if (titulo) {
     titulo.textContent = mensaje;
   }
@@ -28,17 +28,7 @@ export async function buscarProducto(nombreProducto) {
     const respuesta = await fetch(API_URL);
     if (!respuesta.ok) throw new Error("No se pudo cargar los productos del backend.");
 
-    const data = await respuesta.json();
-
-    const productos = [];
-    for (const categoria in data.productos) {
-      data.productos[categoria].forEach(prod => {
-        productos.push({
-          ...prod,
-          categoria
-        });
-      });
-    }
+    const productos = await respuesta.json(); // ✅ ya es un array plano
 
     const contenedorProductos = document.querySelector(".container");
     if (!contenedorProductos) {

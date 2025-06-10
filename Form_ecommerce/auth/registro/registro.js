@@ -8,18 +8,26 @@ registroForm.addEventListener('submit', async (e) => {
   const email = document.getElementById('email').value;
   const password = document.getElementById('password').value;
   const fechaNacimiento = document.getElementById('cita').value;
-  
 
   try {
-    // Verificar si el email ya está registrado en el servidor
-    const usuariosRes = await fetch('http://localhost:3000/usuarios');
-    const usuarios = await usuariosRes.json();
+    // Verificamos si el email ya está registrado
+    const respuesta = await fetch('http://localhost:3000/api/usuarios/existeEmail', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email })
+    });
 
-    const yaExiste = usuarios.find(u => u.email === email);
-    if (yaExiste) {
+    if (!respuesta.ok) {
+      throw new Error(`Error al verificar email: ${respuesta.status}`);
+    }
+
+    const data = await respuesta.json();
+
+    if (data.existe) {
       return alert('¡El usuario ya está registrado!');
     }
 
+    // Crear nuevo usuario
     const nuevoUsuario = {
       nombre,
       apellido,
@@ -29,7 +37,7 @@ registroForm.addEventListener('submit', async (e) => {
       EsCliente: true
     };
 
-    const res = await fetch('http://localhost:3000/usuarios', {
+    const res = await fetch('http://localhost:3000/api/usuarios', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(nuevoUsuario)
@@ -38,15 +46,12 @@ registroForm.addEventListener('submit', async (e) => {
     if (!res.ok) throw new Error('No se pudo registrar el usuario');
 
     const usuarioRegistrado = await res.json();
-
-    // Guardamos el usuario en localStorage (para mantener sesión)
     localStorage.setItem('usuario', JSON.stringify(usuarioRegistrado));
 
     alert('¡Registro exitoso!');
     window.location.href = '../login/login.html';
   } catch (error) {
-    console.error(error);
+    console.error('Error en el registro:', error);
     alert('Hubo un error al registrar el usuario.');
   }
 });
-

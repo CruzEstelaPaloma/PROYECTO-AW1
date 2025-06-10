@@ -13,13 +13,16 @@ export const cardComponet = (title, description, price, imageUrl, id) => {
     `;
 };
 
+
 document.addEventListener('click', (event) => {
     if (event.target && event.target.classList.contains('boton-item')) {
         const card = event.target.closest('.card');
         const title = card.querySelector('.card-header').innerText;
-        const price = card.querySelector('.card-span').innerText;
+        const priceText = card.querySelector('.card-span').innerText;
+        const price = parseFloat(priceText.replace('$', ''));
         const quantity = parseInt(card.querySelector('#cantidad').value);
-        const id = parseInt(card.getAttribute('data-id'));
+        const id = String(card.getAttribute('data-id'));
+
 
         if (quantity <= 0) {
             alert("Selecciona una cantidad válida.");
@@ -32,7 +35,7 @@ document.addEventListener('click', (event) => {
         if (existingProduct) {
             existingProduct.quantity += quantity;
         } else {
-            cart.push({ id, title, price, quantity });
+            cart.push({ id, title, price: `$${price.toFixed(2)}`, quantity });
         }
 
         localStorage.setItem('cart', JSON.stringify(cart));

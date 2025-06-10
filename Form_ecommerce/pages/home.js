@@ -3,29 +3,25 @@ import { insertarSearchContainer, buscarProducto, actualizarTitulo } from '../co
 import { cargarProductos } from '../components/dataLoader.js'; 
 import { loadNavBar } from '../components/navbar.js';
 
-const JSON_URL = "../data.json"; 
-
-loadNavBar();
-
+const JSON_URL = "http://localhost:3000/api/Productos"; // Usamos la API del backend
 
 const TITULOS_CATEGORIAS = {
   maquillaje: "Productos de Maquillaje",
   ropa: "Prenda de Ropa",
   accesorios: "Accesorios",
-
 };
+
+loadNavBar();
 
 document.addEventListener("DOMContentLoaded", () => {
   insertarSearchContainer();
 
-  
   if (document.body.id === "principal") {
-    cargarProductos();
+    cargarProductos(); // muestra todos los productos en el home
   } else {
-    cargarProductosPorCategoria();
+    cargarProductosPorCategoria(); // muestra según categoría (body.id)
   }
 
-  
   const searchInput = document.getElementById("search-input");
   if (searchInput) {
     searchInput.addEventListener("input", () => {
@@ -34,14 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
       if (searchValue) {
         buscarProducto(searchValue); 
       } else {
-        
         const tituloOriginal =
           document.body.id === "principal"
             ? "Tienda de belleza"
             : TITULOS_CATEGORIAS[document.body.id] || "Productos";
         actualizarTitulo(tituloOriginal);
 
-       
         if (document.body.id === "principal") {
           cargarProductos();
         } else {
@@ -51,7 +45,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 });
-
 
 export function renderizarCards(productos) {
   const cardContainer = document.getElementById('cardContainer');
@@ -69,19 +62,18 @@ export function renderizarCards(productos) {
 
   productos.forEach(producto => {
     const cardHTML = cardComponet(
-      producto.nombre,        // Título
-      producto.desc,   // Descripción
-      `$${producto.precio.toFixed(2)}`, // Precio
-      producto.imagen,        // Imagen
-      producto.id             // ID del producto
+      producto.nombre,
+      producto.desc,
+      `$${(producto.precio ?? 0).toFixed(2)}`,
+      producto.imagen,
+      producto._id || producto.id
     );
     cardContainer.innerHTML += cardHTML;
   });
 }
 
-
 export async function cargarProductosPorCategoria() {
-  const categoria = document.body.id; 
+  const categoria = document.body.id;
   const contenedorProductos = document.querySelector(".container");
 
   if (!contenedorProductos) {
@@ -92,28 +84,20 @@ export async function cargarProductosPorCategoria() {
   try {
     if (!categoria) throw new Error("El atributo 'id' del body no está definido.");
 
-    const respuesta = await fetch('http://localhost:3000/productos');
-    if (!respuesta.ok) throw new Error("No se pudo cargar el archivo JSON.");
+    const respuesta = await fetch(JSON_URL);
+    if (!respuesta.ok) throw new Error("No se pudo cargar el archivo de productos.");
 
-    const data = await respuesta.json();
+    const productos = await respuesta.json(); // array plano
 
-    // Unificamos todos los productos en un solo array con su categoría
-    const productos = [];
-    for (const cat in data.productos) {
-      data.productos[cat].forEach(p => {
-        productos.push({ ...p, categoria: cat });
-      });
-    }
-
-    const productosFiltrados = productos.filter(p => 
-      p.categoria.toLowerCase() === categoria.toLowerCase()
+    const productosFiltrados = productos.filter(p =>
+      p.categoria?.toLowerCase() === categoria.toLowerCase()
     );
 
     if (!productosFiltrados.length) {
       throw new Error(`No se encontraron productos para la categoría: ${categoria}`);
     }
 
-    renderizarCards(productosFiltrados); 
+    renderizarCards(productosFiltrados);
   } catch (error) {
     console.error("Error al cargar los productos:", error.message);
     contenedorProductos.innerHTML = `<p>${error.message}</p>`;
