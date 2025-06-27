@@ -61,12 +61,13 @@ export function renderizarCards(productos) {
   cardContainer.innerHTML = ""; 
 
   productos.forEach(producto => {
+    
     const cardHTML = cardComponet(
       producto.nombre,
       producto.desc,
       `$${(producto.precio ?? 0).toFixed(2)}`,
       producto.imagen,
-      producto._id || producto.id
+      producto._id 
     );
     cardContainer.innerHTML += cardHTML;
   });

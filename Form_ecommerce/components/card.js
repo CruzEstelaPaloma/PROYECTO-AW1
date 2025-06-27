@@ -6,7 +6,7 @@ export const cardComponet = (title, description, price, imageUrl, id) => {
         <div class="card-body">${description}</div>
         <div class="card-span">${price}</div>
         <div>
-            <input type="number" name="0" id="cantidad" min="0" max="5" value="0">
+            <input type="number" name="0" id="cantidad" min="0" max="10" value="0">
         </div>
         <input type="button" value="Agregar al carrito" id="Add" class="boton-item">
     </div>
@@ -32,13 +32,36 @@ document.addEventListener('click', (event) => {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         const existingProduct = cart.find(item => item.id === id);
 
-        if (existingProduct) {
-            existingProduct.quantity += quantity;
-        } else {
-            cart.push({ id, title, price: `$${price.toFixed(2)}`, quantity });
+       //if (existingProduct) {
+       //    existingProduct.quantity += quantity;
+       // } else {
+       //     cart.push({ 
+       //        id: card.getAttribute('data-id'),  // ✅ ya es el _id real
+       //        title, 
+       //        price: `$${price.toFixed(2)}`, 
+       //         quantity 
+       //      });
+       // }//
+
+       if (existingProduct) {
+        if (existingProduct.quantity + quantity > 5) {
+          alert("Lo sentimos! Solo podés agregar hasta 5 unidades del mismo producto.");
+          return;
         }
+        existingProduct.quantity += quantity;
+      } else {
+        if (quantity > 5) {
+          alert("Lo sentimos! Solo podés agregar hasta 5 unidades del mismo producto.");
+          return;
+        }
+        cart.push({ id: card.getAttribute('data-id'), title, price: `$${price.toFixed(2)}`, quantity });
+      }
+      
+
 
         localStorage.setItem('cart', JSON.stringify(cart));
         alert(`${title} agregado al carrito.`);
+
+        card.querySelector('#cantidad').value = 0;
     }
 });

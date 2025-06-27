@@ -108,14 +108,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 0);
         
             const venta = {
-                id_usuario: usuario.id,  // <- esto está bien
+                id_usuario: usuario.id, 
                 direccion: usuario.direccion || 'Sin dirección',
                 total,
                 productos
-              };
+            };
+
+            console.log("🧾 Venta enviada al backend:", venta);
+            console.log("🔐 Token:", token);
         
             try {
+                const token = localStorage.getItem('token');
                 const res = await fetch('http://localhost:3000/api/Ventas/comprar', {
+                   
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' ,
                    'Authorization': `Bearer ${token}`},
