@@ -24,7 +24,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const goToIndexButton = document.getElementById('goToIndex');
         goToIndexButton.addEventListener('click', () => {
-            window.location.href = '/Form_ecommerce/index.html';
+            window.location.href = '../index.html';
+
         });
 
         return;

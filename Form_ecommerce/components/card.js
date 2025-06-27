@@ -1,4 +1,6 @@
 export const cardComponet = (title, description, price, imageUrl, id) => {
+
+    
     return `
     <div class="card" data-id="${id}">
         <img src="${imageUrl}" alt="" class="card-imag" style="width: 220px; height: 220px;">
@@ -32,16 +34,7 @@ document.addEventListener('click', (event) => {
         let cart = JSON.parse(localStorage.getItem('cart')) || [];
         const existingProduct = cart.find(item => item.id === id);
 
-       //if (existingProduct) {
-       //    existingProduct.quantity += quantity;
-       // } else {
-       //     cart.push({ 
-       //        id: card.getAttribute('data-id'),  // ✅ ya es el _id real
-       //        title, 
-       //        price: `$${price.toFixed(2)}`, 
-       //         quantity 
-       //      });
-       // }//
+     
 
        if (existingProduct) {
         if (existingProduct.quantity + quantity > 5) {

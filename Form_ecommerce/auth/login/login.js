@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
           await obtenerUsuarios();
   
           
-          window.location.href = '/Form_ecommerce/index.html';
+          window.location.href = '../../index.html';
   
         } catch (error) {
           console.error(error);
